@@ -4,46 +4,6 @@
 ;;; Code:
 (require 'cl)
 
-(defvar ShadowRZ/packages
-  '(
-    company
-    swiper
-    flycheck
-    counsel
-    smartparens
-    docbook
-    popwin
-    elfeed
-    powerline
-    moe-theme
-    adoc-mode
-    js2-mode
-    web-mode
-    nodejs-repl
-    exec-path-from-shell
-    ) "Default packages.")
-
-;; package.el
-(when (>= emacs-major-version 24)
-  (setq package-archives
-	'(("gnu"   . "https://elpa.gnu.org/packages/")
-	  ("melpa-stable" . "https://stable.melpa.org/packages/"))))
-
-(setq package-selected-packages ShadowRZ/packages)
-
-(defun ShadowRZ/packages-installed-p ()
-  "Check if all defined packages are installed."
-  (loop for pkg in ShadowRZ/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
-
-(unless (ShadowRZ/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg ShadowRZ/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
-
 ;; Requires
 (require 'recentf)
 (recentf-mode 1)
