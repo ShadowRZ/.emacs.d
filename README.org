@@ -1,0 +1,3 @@
+#+TITLE: @ShadowRZ's .emacs.d
+
+This is my own =.emacs.d=.
