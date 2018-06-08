@@ -3,6 +3,7 @@
 
 (depends-on "adoc-mode")
 (depends-on "cask")
+(depends-on "cask-mode")
 (depends-on "company")
 (depends-on "counsel")
 (depends-on "dash")
