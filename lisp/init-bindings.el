@@ -14,19 +14,11 @@
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 
-(if (boundp 'mail-user-agent)
-    (setq mail-user-agent 'wl-user-agent))
-(if (fboundp 'define-mail-user-agent)
-    (define-mail-user-agent
-      'wl-user-agent
-      'wl-user-agent-compose
-      'wl-draft-send
-      'wl-draft-kill
-      'mail-send-hook))
-
 (defun open-init-file()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
+
+(global-set-key (kbd "C-c a") 'org-agenda)
 
 (global-set-key (kbd "<f2>") 'open-init-file)
 (global-set-key (kbd "C-x w") 'elfeed)

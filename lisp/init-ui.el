@@ -14,14 +14,14 @@
 (set-fontset-font "fontset-default" '(#xe0b0 . #xe0b3) "PowerlineSymbols")
 
 ;; Powerline.
-(require 'powerline)
+(use-package powerline)
 
 ;; Theme
-(require 'moe-theme)
-(setq moe-light-pure-white-background-in-terminal nil)
-(moe-light)
-(moe-theme-set-color 'orange)
-(powerline-moe-theme)
+(use-package moe-theme
+  :config
+  (moe-light)
+  (moe-theme-set-color 'orange)
+  (powerline-moe-theme))
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)

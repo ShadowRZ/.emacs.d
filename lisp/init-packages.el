@@ -2,42 +2,36 @@
 ;;; Commentary:
 
 ;;; Code:
-(require 'cl)
 
 ;; Requires
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-menu-item 10)
+(use-package recentf
+  :config
+  (recentf-mode 1))
 
-(require 'org)
-(setq org-src-fontify-natively t)
+(use-package org)
 
 ;; - EMMS.
-(require 'emms)
-(require 'emms-setup)
-(emms-all)
-(require 'emms-lyrics)
-(emms-lyrics 1)
-(require 'emms-source-playlist)
-(emms-default-players)
+(use-package emms)
+(use-package emms-setup
+  :config
+  (emms-all)
+  :after (emms))
+(use-package emms-lyrics
+  :config
+  (emms-lyrics 1)
+  :after (emms))
+(use-package emms-source-playlist
+  :config
+  (emms-default-players)
+  :after (emms))
 
-;; - WanderLust.
-(autoload 'wl "wl" "Wanderlust" t)
-(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
-(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
-(autoload 'wl-user-agent-compose "wl-draft" nil t)
+(use-package dired-x)
 
-;; - Emacs-Muse related.
-(require 'muse-mode)
-(require 'muse-html)
-(require 'muse-latex)
-(require 'muse-context)
-(require 'muse-project)
+(use-package popwin
+  :config
+  (popwin-mode 1))
 
-(require 'dired-x)
-
-(require 'popwin)
-(popwin-mode 1)
+(use-package elfeed)
 
 (delete-selection-mode 1)
 (global-hl-line-mode 1)
