@@ -20,8 +20,14 @@
 (use-package moe-theme
   :config
   (moe-light)
-  (moe-theme-set-color 'orange)
+  (moe-theme-set-color 'purple)
   (powerline-moe-theme))
+
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook))
+
+(setq dashboard-banner-logo-title "ShadowRZ / Emacs <---> Welcome !")
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)

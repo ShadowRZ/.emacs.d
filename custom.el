@@ -18,7 +18,7 @@
  '(org-src-fontify-natively t)
  '(package-selected-packages
    (quote
-    (use-package cask-mode pallet company swiper flycheck counsel smartparens docbook popwin elfeed powerline moe-theme adoc-mode js2-mode web-mode nodejs-repl exec-path-from-shell)))
+    (dashboard magit use-package yaml-mode cask-mode pallet company swiper flycheck counsel smartparens docbook popwin elfeed powerline moe-theme adoc-mode js2-mode web-mode nodejs-repl exec-path-from-shell)))
  '(recentf-max-menu-item 10))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
