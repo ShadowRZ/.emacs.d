@@ -41,6 +41,7 @@
 (global-flycheck-mode 1)
 (global-company-mode 1)
 (global-auto-revert-mode 1)
+(rcirc-track-minor-mode 1)
 
 (setq auto-mode-alist
       (append

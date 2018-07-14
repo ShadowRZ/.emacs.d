@@ -19,6 +19,7 @@
 (depends-on "ivy")
 (depends-on "js2-mode")
 (depends-on "magit")
+(depends-on "markdown-mode")
 (depends-on "markup-faces")
 (depends-on "moe-theme")
 (depends-on "nodejs-repl")
