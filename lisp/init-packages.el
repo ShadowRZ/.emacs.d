@@ -33,6 +33,22 @@
 
 (use-package elfeed)
 
+(use-package wl
+  :commands (wl wl-other-frame))
+
+(use-package wl-draft
+  :commands (wl-draft wl-user-agent-compose)
+  :config
+  (if (boundp 'mail-user-agent)
+      (setq mail-user-agent 'wl-user-agent))
+  (if (fboundp 'define-mail-user-agent)
+      (define-mail-user-agent
+        'wl-user-agent
+        'wl-user-agent-compose
+        'wl-draft-send
+        'wl-draft-kill
+        'mail-send-hook)))
+
 (delete-selection-mode 1)
 (global-hl-line-mode 1)
 (ivy-mode 1)

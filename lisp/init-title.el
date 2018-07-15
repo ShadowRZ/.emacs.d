@@ -4,9 +4,8 @@
 ;;; Code:
 (setq-default frame-title-format
 	      '(:eval
-		(format "[%d]%s@%s"
+		(format "[%d]@%s"
 			(emacs-pid)
-			(user-login-name)
 			(system-name))))
 
 (provide 'init-title)
