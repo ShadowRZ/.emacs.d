@@ -1,3 +1,5 @@
-#+TITLE: @ShadowRZ's .emacs.d
+#+TITLE: [-Inf Emacs] @ShadowRZ's .emacs.d
 
-This is my own =.emacs.d=.
+[[./logo.png]]
+
+This is my own =.emacs.d=, named (prototype) "-Inf Emacs."

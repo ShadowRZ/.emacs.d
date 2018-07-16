@@ -23,7 +23,8 @@
   :config
   (dashboard-setup-startup-hook))
 
-(setq dashboard-banner-logo-title "ShadowRZ / Emacs <---> Welcome !")
+(setq dashboard-banner-logo-title "[-Inf(inity) Emacs]")
+(setq dashboard-startup-banner (expand-file-name "logo.png" user-emacs-directory))
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
