@@ -9,7 +9,8 @@
 (pallet-mode t)
 (require 'use-package)
 
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 (require 'init-packages)
 (require 'init-ui)
 (require 'init-title)
