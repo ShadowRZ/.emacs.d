@@ -18,7 +18,7 @@
  '(org-src-fontify-natively t)
  '(package-selected-packages
    (quote
-    (solarized-theme solarized-light which-key org-projectile counsel-projectile markdown-mode markdown-mode+ dashboard magit use-package yaml-mode cask-mode pallet company swiper flycheck counsel smartparens docbook popwin elfeed adoc-mode js2-mode web-mode nodejs-repl exec-path-from-shell)))
+    (pinentry solarized-theme solarized-light which-key org-projectile counsel-projectile markdown-mode markdown-mode+ dashboard magit use-package yaml-mode cask-mode pallet company swiper flycheck counsel smartparens docbook popwin elfeed adoc-mode js2-mode web-mode nodejs-repl exec-path-from-shell)))
  '(recentf-max-menu-item 10)
  '(which-key-idle-delay 0.5))
 (custom-set-faces

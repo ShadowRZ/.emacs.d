@@ -26,6 +26,7 @@
 (depends-on "org-projectile")
 (depends-on "package-build")
 (depends-on "pallet")
+(depends-on "pinentry")
 (depends-on "pkg-info")
 (depends-on "popwin")
 (depends-on "projectile")
