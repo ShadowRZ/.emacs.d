@@ -13,15 +13,11 @@
 (set-fontset-font "fontset-default" '(#xe0a0 . #xe0a2) "PowerlineSymbols")
 (set-fontset-font "fontset-default" '(#xe0b0 . #xe0b3) "PowerlineSymbols")
 
-;; Powerline.
-(use-package powerline)
-
 ;; Theme
-(use-package moe-theme
+(use-package solarized-theme
+  :ensure t
   :config
-  (moe-light)
-  (moe-theme-set-color 'purple)
-  (powerline-moe-theme))
+  (load-theme 'solarized-light t))
 
 (use-package dashboard
   :config

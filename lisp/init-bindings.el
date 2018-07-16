@@ -22,7 +22,7 @@
 
 (global-set-key (kbd "<f2>") 'open-init-file)
 (global-set-key (kbd "C-x w") 'elfeed)
-(global-set-key (kbd "C-x g") 'grep)
+(global-set-key (kbd "C-x C-g") 'grep)
 (global-set-key (kbd "C-x C-r") 'counsel-recentf)
 
 (global-set-key (kbd "C-s") 'swiper)
@@ -36,6 +36,8 @@
 (global-set-key (kbd "C-x l") 'counsel-locate)
 
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
+
+(global-set-key (kbd "C-x g") 'magit-status)
 
 (provide 'init-bindings)
 ;;; init-bindings.el ends here

@@ -10,6 +10,7 @@ emms
 emms-mpv-input-file
 recentf
 tutorial
+url
 .\#*
 
 # Org-mode
@@ -44,6 +45,7 @@ flycheck_*.el
 
 # projectiles files
 .projectile
+projectile-bookmarks.eld
 
 # directory configuration
 .dir-locals.el
