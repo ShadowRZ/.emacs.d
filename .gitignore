@@ -50,4 +50,4 @@ projectile-bookmarks.eld
 # directory configuration
 .dir-locals.el
 
-
+custom.el
