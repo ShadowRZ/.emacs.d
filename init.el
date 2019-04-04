@@ -42,13 +42,11 @@ There are two things you can do about this warning:
 (load custom-file)
 (setq
   make-backup-files nil
-ring-bell-function 'ignore
-auto-save-default nil
-ivy-use-virtual-buffers t
-   ivy-count-format "(%d/%d) -> "
-   ivy-use-selectable-prompt t
-
-)
+  ring-bell-function 'ignore
+  auto-save-default nil
+  ivy-use-virtual-buffers t
+  ivy-count-format "(%d/%d) -> "
+  ivy-use-selectable-prompt t)
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (put 'dired-find-alternate-file 'disabled nil)

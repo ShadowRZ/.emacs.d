@@ -32,11 +32,8 @@
   :config
   (popwin-mode 1))
 
-(use-package elfeed)
-
-(use-package dashboard
-  :config
-  (dashboard-setup-startup-hook))
+(use-package elfeed
+  :ensure t)
 
 (use-package wl
   :commands (wl wl-other-frame))
