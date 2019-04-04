@@ -26,12 +26,15 @@
 ;; Constants / Loads ?
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
-(setq make-backup-files nil)
-(setq ring-bell-function 'ignore)
-(setq auto-save-default nil)
-(setq erc-prompt "ShadowRZ-Desktop.Infinity.Stream >")
-(setq ivy-use-virtual-buffers t)
-(setq ivy-count-format "(%d/%d) ")
+(setq
+  make-backup-files nil
+ring-bell-function 'ignore
+auto-save-default nil
+ivy-use-virtual-buffers t
+   ivy-count-format "(%d/%d) -> "
+   ivy-use-selectable-prompt t
+
+)
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (put 'dired-find-alternate-file 'disabled nil)

@@ -79,12 +79,19 @@
   :config
   (which-key-mode 1)
   (which-key-setup-side-window-bottom))
+(use-package semantic
+  :ensure t)
 
 (delete-selection-mode 1)
 (global-hl-line-mode 1)
 (abbrev-mode 1)
 (global-auto-revert-mode 1)
 (rcirc-track-minor-mode 1)
+
+(global-semanticdb-minor-mode)
+(global-semantic-idle-scheduler-mode)
+(global-semantic-highlight-func-mode)
+(global-semantic-stickyfunc-mode -1)
 
 (setq auto-mode-alist
       (append
