@@ -23,7 +23,7 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
-(setq initial-frame-alist (quote ((fullscreen . maximized))))
+(set-frame-parameter nil 'fullscreen 'fullboth)
 (setq-default cursor-type 'bar)
 
 (provide 'init-ui)
