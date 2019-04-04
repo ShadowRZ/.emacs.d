@@ -5,6 +5,7 @@
 
 ;; Requires
 (use-package recentf
+  :ensure t
   :config
   (recentf-mode 1))
 
@@ -70,7 +71,7 @@
 (use-package projectile
   :ensure t
   :config
-  (projectile-global-mode 1))
+  (projectile-mode 1))
 (use-package which-key
   :ensure t
   :config

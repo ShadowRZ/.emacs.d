@@ -14,17 +14,17 @@
 (set-fontset-font "fontset-default" '(#xe0b0 . #xe0b3) "PowerlineSymbols")
 
 ;; Theme
-(use-package solarized-theme
+(use-package dracula-theme
   :ensure t
   :config
-  (load-theme 'solarized-light t))
+  (load-theme 'dracula t))
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
 (set-frame-parameter nil 'fullscreen 'fullboth)
-(setq-default cursor-type 'bar)
+(setq-default cursor-type 'box)
 
 (provide 'init-ui)
 ;;; init-ui.el ends here

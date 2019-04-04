@@ -1,4 +1,4 @@
-;;; title.el --- Set window title.
+;;; init-title.el --- Set window title.
 ;;; Commentary:
 
 ;;; Code:
@@ -9,4 +9,4 @@
 			(system-name))))
 
 (provide 'init-title)
-;;; title.el ends here
+;;; init-title.el ends here
