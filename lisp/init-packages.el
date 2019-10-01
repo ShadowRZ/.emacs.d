@@ -35,8 +35,7 @@
   :config
   (popwin-mode 1))
 
-(use-package elfeed
-  :ensure t)
+(use-package elfeed)
 
 (use-package wl
   :commands (wl wl-other-frame))
@@ -88,7 +87,6 @@
   (global-semantic-stickyfunc-mode -1)
   (semantic-mode))
 (use-package pinentry
-  :ensure t
   :config
   (pinentry-start))
 (use-package org-bullets
