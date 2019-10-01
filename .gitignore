@@ -51,3 +51,5 @@ projectile-bookmarks.eld
 .dir-locals.el
 
 custom.el
+pyim/
+semanticdb/

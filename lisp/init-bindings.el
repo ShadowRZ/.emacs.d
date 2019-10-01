@@ -5,11 +5,12 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
-(add-hook 'sgml-mode-hook 'linum-mode)
+(add-hook 'sgml-mode-hook 'line-number-mode)
 (dolist (hook (quote
-	       (turn-on-auto-fill text-mode-hook-identify linum-mode)))
+	       (turn-on-auto-fill text-mode-hook-identify line-number-mode)))
   (add-hook 'text-mode-hook hook))
-(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'prog-mode-hook 'line-number-mode)
+(remove-hook 'org-mode-hook 'line-number-mode)
 
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
@@ -36,6 +37,7 @@
 (global-set-key (kbd "C-x l") 'counsel-locate)
 
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f8>") 'neotree-toggle)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 
