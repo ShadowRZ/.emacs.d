@@ -26,7 +26,9 @@ There are two things you can do about this warning:
   (package-install 'use-package))
 (require 'use-package)
 
+;; Default loads.
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+;; Place default.el here. (info "(emacs) Init File")
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 (require 'init-packages)
 (require 'init-ui)
