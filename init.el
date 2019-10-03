@@ -3,6 +3,9 @@
 
 ;;; Code:
 
+(setq custom-file "~/.emacs.d/custom.el")
+(load-file custom-file)
+
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -43,8 +46,7 @@ There are two things you can do about this warning:
   (exec-path-from-shell-initialize))
 
 ;; Constants / Loads ?
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
+
 (setq
   make-backup-files nil
   ring-bell-function 'ignore

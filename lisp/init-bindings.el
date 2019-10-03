@@ -22,7 +22,6 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 
 (global-set-key (kbd "<f2>") 'open-init-file)
-(global-set-key (kbd "C-x w") 'elfeed)
 (global-set-key (kbd "C-x C-g") 'grep)
 (global-set-key (kbd "C-x C-r") 'counsel-recentf)
 

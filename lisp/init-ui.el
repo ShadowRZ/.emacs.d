@@ -14,5 +14,11 @@
 (set-frame-parameter nil 'fullscreen 'fullboth)
 (setq-default cursor-type 'box)
 
+(use-package moe-theme
+  :ensure t
+  :config
+  (moe-dark)
+  (moe-theme-set-color 'orange))
+
 (provide 'init-ui)
 ;;; init-ui.el ends here
