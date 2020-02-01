@@ -53,4 +53,6 @@ projectile-bookmarks.eld
 custom.el
 pyim/
 semanticdb/
-site-lisp/default.el
+site-lisp/*
+!site-lisp/README
+emojis
