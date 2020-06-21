@@ -25,5 +25,10 @@
   (moe-dark)
   (moe-theme-set-color 'orange))
 
+(use-package smart-mode-line
+  :ensure t
+  :config
+  (sml/setup)
+  (sml/apply-theme 'light))
 (provide 'init-ui)
 ;;; init-ui.el ends here

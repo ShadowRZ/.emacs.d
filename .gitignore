@@ -56,3 +56,5 @@ semanticdb/
 site-lisp/*
 !site-lisp/README
 emojis
+newsticker
+var

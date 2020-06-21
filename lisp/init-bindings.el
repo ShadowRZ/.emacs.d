@@ -36,7 +36,7 @@
 (global-set-key (kbd "C-x l") 'counsel-locate)
 
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "<f8>") 'neotree-toggle)
+(global-set-key (kbd "<f8>") 'treemacs)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 
