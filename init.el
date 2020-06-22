@@ -3,9 +3,6 @@
 
 ;;; Code:
 
-(setq custom-file "~/.emacs.d/custom.el")
-(load-file custom-file)
-
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -27,7 +24,10 @@ There are two things you can do about this warning:
   (package-refresh-contents))
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
-(require 'use-package)
+(eval-when-compile
+  (require 'use-package)
+  (require 'use-package-ensure)
+  (setq use-package-ensure t))
 
 ;; Default loads.
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
@@ -40,10 +40,10 @@ There are two things you can do about this warning:
 
 ;; Mac Hack :)
 (when (memq window-system '(mac ns))
-  (if (package-installed-p exec-path-from-shell)
-      (package-install exec-path-from-shell t))
-  (require 'exec-path-from-shell)
-  (exec-path-from-shell-initialize))
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (exec-path-from-shell-initialize)))
 
 ;; Constants / Loads ?
 
@@ -59,5 +59,8 @@ There are two things you can do about this warning:
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (put 'dired-find-alternate-file 'disabled nil)
+
+(setq custom-file "~/.emacs.d/custom.el")
+(load-file custom-file)
 
 ;;; init.el ends here

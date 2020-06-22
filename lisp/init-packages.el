@@ -4,42 +4,42 @@
 ;;; Code:
 
 ;; Requires
+(use-package delight
+  :config
+  (delight 'eldoc-mode nil "eldoc"))
 (use-package recentf
-  :ensure t
   :config
   (recentf-mode 1))
 
 (use-package org
   :config
-  (add-hook 'org-mode-hook 'org-indent-mode))
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  :bind (("C-c a" . org-agenda)))
 
 ;; - EMMS.
 (use-package emms
-  :ensure t)
-(use-package emms-setup
   :config
+  (require 'emms-setup)
+  (require 'emms-lyrics)
+  (require 'emms-source-playlist)
   (emms-all)
-  :after (emms))
-(use-package emms-lyrics
-  :config
+  (emms-default-players)
   (emms-lyrics 1)
-  :after (emms))
-(use-package emms-source-playlist
-  :config
-  (setq emms-player-list '(emms-player-mpv))
-  :after (emms))
+  (setq emms-info-functions '(emms-info-libtag)))
 
 (use-package dired-x)
 
 (use-package popwin
-  :ensure t
   :config
   (popwin-mode 1))
 
 (use-package wl
+  :ensure nil
   :commands (wl wl-other-frame))
 
 (use-package wl-draft
+  :ensure nil
+  :after wl
   :commands (wl-draft wl-user-agent-compose)
   :config
   (if (boundp 'mail-user-agent)
@@ -52,44 +52,55 @@
         'wl-draft-kill
         'mail-send-hook)))
 
+;; - Ivy / Counsel / Swiper
 (use-package ivy
-  :ensure t
+  :delight ivy-mode
   :config
   (ivy-mode 1))
 (use-package counsel
-  :ensure t
+  :delight counsel-mode
   :config
   (counsel-mode 1))
+(use-package swiper
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper-backward)))
+
+(use-package magit
+  :bind (("C-x g" . magit-status)))
+
 (use-package flycheck
-  :ensure t
   :config
   (global-flycheck-mode 1))
+
 (use-package company
-  :ensure t
+  :delight company-mode
   :config
   (global-company-mode 1))
+
 (use-package projectile
-  :ensure t
   :config
   (projectile-mode 1))
+
 (use-package which-key
-  :ensure t
+  :delight which-key-mode
   :config
   (which-key-mode 1)
   (which-key-setup-side-window-bottom))
+
 (use-package semantic
-  :ensure t
   :config
   (global-semanticdb-minor-mode)
   (global-semantic-idle-scheduler-mode)
   (global-semantic-highlight-func-mode)
   (global-semantic-stickyfunc-mode -1)
   (semantic-mode))
+
 (use-package pinentry
-  :ensure t
   :config
   (pinentry-start))
+
 (use-package org-bullets
+  :after org
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
@@ -138,7 +149,6 @@
    ("C-;" . pyim-delete-word-from-personal-buffer)))
 
 (use-package treemacs
-  :ensure t
   :defer t
   :init
   (with-eval-after-load 'winum
@@ -203,29 +213,27 @@
         ("M-0"       . treemacs-select-window)
         ("C-x t 1"   . treemacs-delete-other-windows)
         ("C-x t t"   . treemacs)
+        ("<f8>"      . treemacs)
         ("C-x t B"   . treemacs-bookmark)
         ("C-x t C-t" . treemacs-find-file)
         ("C-x t M-t" . treemacs-find-tag)))
 
 (use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
+  :after treemacs projectile)
 
 (use-package treemacs-magit
-  :after treemacs magit
-  :ensure t)
+  :after treemacs magit)
+
+;; - JS2 / Web mode.
+(use-package js2-mode
+  :mode "\\.js\\'")
+(use-package web-mode
+  :mode "\\.html'")
 
 (delete-selection-mode 1)
 (global-hl-line-mode 1)
 (abbrev-mode 1)
 (global-auto-revert-mode 1)
-(rcirc-track-minor-mode 1)
-
-(setq auto-mode-alist
-      (append
-       '(("\\.js\\'" . js2-mode))
-       '(("\\.html\\'" . web-mode))
-       auto-mode-alist))
 
 (defun ShadowRZ/dired-modes ()
   "Dired modes setup."

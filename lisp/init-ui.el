@@ -14,21 +14,14 @@
 (set-frame-parameter nil 'fullscreen 'fullboth)
 (setq-default cursor-type 'box)
 
-(use-package moe-theme
-  :ensure t
-  :config
-  (setq moe-theme-highlight-buffer-id t)
-  (when (package-installed-p 'markdown-mode)
-    (setq moe-theme-resize-markdown-title '(2.0 1.7 1.5 1.3 1.0 1.0)))
-  (setq moe-theme-resize-org-title '(2.2 1.8 1.6 1.4 1.2 1.0 1.0 1.0 1.0))
-  (setq moe-theme-resize-rst-title '(2.0 1.7 1.5 1.3 1.1 1.0))
-  (moe-dark)
-  (moe-theme-set-color 'orange))
-
 (use-package smart-mode-line
-  :ensure t
+  :init
+  (setq sml/no-confirm-load-theme t)
   :config
   (sml/setup)
-  (sml/apply-theme 'light))
+  (setq sml/theme 'respectful))
+
+(use-package base16-theme)
+
 (provide 'init-ui)
 ;;; init-ui.el ends here

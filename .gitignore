@@ -58,3 +58,4 @@ site-lisp/*
 emojis
 newsticker
 var
+.cache
