@@ -7,6 +7,7 @@
 (use-package delight
   :config
   (delight 'eldoc-mode nil "eldoc"))
+
 (use-package recentf
   :config
   (recentf-mode 1))
@@ -26,8 +27,6 @@
   (emms-default-players)
   (emms-lyrics 1)
   (setq emms-info-functions '(emms-info-libtag)))
-
-(use-package dired-x)
 
 (use-package popwin
   :config
@@ -234,6 +233,8 @@
 (global-hl-line-mode 1)
 (abbrev-mode 1)
 (global-auto-revert-mode 1)
+
+(require 'dired-x)
 
 (defun ShadowRZ/dired-modes ()
   "Dired modes setup."
