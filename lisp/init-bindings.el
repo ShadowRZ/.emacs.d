@@ -34,5 +34,7 @@
 
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 
+(global-set-key (kbd "C-x C-b") 'bs-show)
+
 (provide 'init-bindings)
 ;;; init-bindings.el ends here
