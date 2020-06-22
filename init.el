@@ -27,7 +27,7 @@ There are two things you can do about this warning:
 (eval-when-compile
   (require 'use-package)
   (require 'use-package-ensure)
-  (setq use-package-ensure t))
+  (setq use-package-always-ensure t))
 
 ;; Default loads.
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
