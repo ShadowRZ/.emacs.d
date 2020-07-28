@@ -51,7 +51,6 @@ There are two things you can do about this warning:
   make-backup-files nil
   ring-bell-function 'ignore
   auto-save-default nil
-  rmail-file-name "~/.cache/rmail"
   ivy-use-virtual-buffers t
   ivy-count-format "(%d/%d) -> "
   ivy-use-selectable-prompt t

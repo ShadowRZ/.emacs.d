@@ -6,11 +6,8 @@
 
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 (add-hook 'sgml-mode-hook 'display-line-numbers-mode)
-(dolist (hook (quote
-	       (turn-on-auto-fill text-mode-hook-identify display-line-numbers-mode)))
-  (add-hook 'text-mode-hook hook))
+(add-hook 'text-mode-hook 'text-mode-hook-identify)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-(remove-hook 'org-mode-hook 'display-line-numbers-mode)
 
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))

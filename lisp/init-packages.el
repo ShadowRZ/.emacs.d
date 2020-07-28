@@ -25,8 +25,7 @@
   (require 'emms-source-playlist)
   (emms-all)
   (emms-default-players)
-  (emms-lyrics 1)
-  (setq emms-info-functions '(emms-info-libtag)))
+  (emms-lyrics 1))
 
 (use-package popwin
   :config
