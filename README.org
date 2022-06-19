@@ -4,6 +4,4 @@ This is my own =.emacs.d=.
 
 * Usage
 
-Clone into =~/.emacs.d=.
-
-=default.el= can be placed into =~/.emacs.d/site-lisp=
+Clone into =~/.emacs.d= or =~/.config/emacs=.
