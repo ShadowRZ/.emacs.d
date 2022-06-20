@@ -123,6 +123,46 @@
 ;; Inhibit startup screen
 (setq inhibit-splash-screen t)
 
+;;; Emacs Pinentry
+(unless (package-installed-p 'pinentry)
+  (package-install 'pinentry))
+
+(require 'pinentry)
+(pinentry-start)
+
+;; Setup mu4e
+(require 'mu4e)
+(setq
+ ;; Mu4e folders
+ ;; These folders are actually global. 
+ mu4e-sent-folder "/Sent"
+ mu4e-drafts-folder "/Drafts"
+ mu4e-trash-folder "/Trash"
+ mu4e-refile-folder "/Archive"
+
+ ;; Tell mu4e how to update my mails.
+ mu4e-get-mail-command "mbsync -a" ;; Via mbsync, and sync all accounts.
+ mu4e-update-interval 600 ;; Update every 10 minutes.
+
+ ;; Tell Emacs and mu4e what to do in sending my mail.
+ message-send-mail-function 'sendmail-send-it ;; Via msmtp's sendmail.
+ mu4e-sent-messages-behavior 'sent ;; Preserve my sent mail in `mu4e-sent-folder'.
+
+ ;; Who am I ?
+ user-mail-address "shadowrz@disroot.org"
+ user-full-name "夜坂雅"
+
+ ;; Misc.
+ message-kill-buffer-on-exit t
+ mu4e-split-view nil
+
+ ;; Set mu4e as default mailer.
+ mail-user-agent 'mu4e-user-agent
+ read-mail-command 'mu4e)
+;; Discourage HTML part.
+(with-eval-after-load 'mm-decode
+  (add-to-list 'mm-discouraged-alternatives "text/html"))
+
 ;; Store automatic customisation options elsewhere
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (when (file-exists-p custom-file)
