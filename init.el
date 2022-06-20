@@ -13,6 +13,11 @@
 
 ;; Set default font face
 (set-face-attribute 'default nil :font "Iosevka Extended" :height 180)
+(set-fontset-font t 'han "等距更纱黑体 SC")
+(set-fontset-font t 'hangul "等距更纱黑体 K")
+(set-fontset-font t 'kana "等距更纱黑体 J")
+(set-fontset-font t 'cjk-misc "等距更纱黑体 SC")
+(set-fontset-font t nil "等距更纱黑体 CL" nil 'append)
 
 ;; Fullscreen on startup
 (set-frame-parameter nil 'fullscreen 'fullboth)
@@ -111,7 +116,9 @@
 (save-place-mode t)
 (savehist-mode t)
 (recentf-mode t)
-(defalias 'yes-or-no #'y-or-n-p)
+
+;; Replace all yes/no with y/n.
+(fset 'yes-or-no-p #'y-or-n-p)
 
 ;; Inhibit startup screen
 (setq inhibit-splash-screen t)
