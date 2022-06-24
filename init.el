@@ -163,6 +163,20 @@
 (with-eval-after-load 'mm-decode
   (add-to-list 'mm-discouraged-alternatives "text/html"))
 
+;; ERC configuration.
+;; C-c e f: Open Libera.Chat
+(global-set-key "\C-cef" (lambda () (interactive)
+                           (erc-tls :server "irc.libera.chat" :port "7000"
+                                    :nick "PhantomFutaba"
+                                    :client-certificate t)))
+(setq
+ erc-rename-buffers t
+ erc-interpret-mirc-color t
+ erc-kill-buffer-on-part t
+ erc-kill-queries-on-quit t
+ erc-kill-server-buffer-on-quit t
+ erc-user-full-name "夜坂雅")
+
 ;; Store automatic customisation options elsewhere
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (when (file-exists-p custom-file)
