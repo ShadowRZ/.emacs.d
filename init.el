@@ -12,12 +12,21 @@
 (load-theme 'leuven t)
 
 ;; Set default font face
-(set-face-attribute 'default nil :font "Iosevka Extended" :height 180)
+(set-face-attribute 'default nil :font "Iosevka Curly Slab" :height 190)
 (set-fontset-font t 'han "等距更纱黑体 SC")
 (set-fontset-font t 'hangul "等距更纱黑体 K")
 (set-fontset-font t 'kana "等距更纱黑体 J")
 (set-fontset-font t 'cjk-misc "等距更纱黑体 SC")
 (set-fontset-font t nil "等距更纱黑体 CL" nil 'append)
+
+;; Force fancy splash screen.
+(defun ShadowRZ/use-fancy-splash-screen-p ()
+  "Return t if fancy splash screens should be used."
+  (and (display-graphic-p)
+       (or (and (display-color-p)
+		(image-type-available-p 'xpm))
+           (image-type-available-p 'pbm))))
+(advice-add 'use-fancy-splash-screens-p :override #'ShadowRZ/use-fancy-splash-screen-p)
 
 ;; Fullscreen on startup
 (set-frame-parameter nil 'fullscreen 'fullboth)
