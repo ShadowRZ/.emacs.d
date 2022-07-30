@@ -12,7 +12,7 @@
 (load-theme 'leuven t)
 
 ;; Set default font face
-(set-face-attribute 'default nil :font "Iosevka Curly Slab" :height 190)
+(set-face-attribute 'default nil :font "Iosevka" :height 190)
 (set-fontset-font t 'han "等距更纱黑体 SC")
 (set-fontset-font t 'hangul "等距更纱黑体 K")
 (set-fontset-font t 'kana "等距更纱黑体 J")
@@ -41,24 +41,20 @@
 (scroll-bar-mode -1)
 
 ;;; Completion framework
-(unless (package-installed-p 'vertico)
-  (package-install 'vertico))
+(unless (package-installed-p 'ivy)
+  (package-install 'ivy))
+
+(unless (package-installed-p 'counsel)
+  (package-install 'counsel))
+
+(ivy-mode)
+(setq
+ ivy-use-virtual-buffers t
+ enable-recursive-minibuffers t)
+(counsel-mode 1)
 
 ;; Enable completion by narrowing
 (vertico-mode t)
-
-;; Improve directory navigation
-(with-eval-after-load 'vertico
-  (define-key vertico-map (kbd "RET") #'vertico-directory-enter)
-  (define-key vertico-map (kbd "DEL") #'vertico-directory-delete-word)
-  (define-key vertico-map (kbd "M-d") #'vertico-directory-delete-char))
-
-;;; Extended completion utilities
-(unless (package-installed-p 'consult)
-  (package-install 'consult))
-(global-set-key [rebind switch-to-buffer] #'consult-buffer)
-(global-set-key (kbd "C-c j") #'consult-line)
-(global-set-key (kbd "C-c i") #'consult-imenu)
 
 ;; Enable line numbering in `prog-mode'
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
@@ -132,12 +128,27 @@
 ;; Inhibit startup screen
 (setq inhibit-splash-screen t)
 
-;;; Emacs Pinentry
+;; Emacs Pinentry
 (unless (package-installed-p 'pinentry)
   (package-install 'pinentry))
 
 (require 'pinentry)
 (pinentry-start)
+
+;; Swiper
+(unless (package-installed-p 'swiper)
+  (package-install 'swiper))
+
+(advice-add 'isearch-forward :override #'swiper)
+
+;; EMMS
+(unless (package-installed-p 'emms)
+  (package-install 'emms))
+
+(require 'emms)
+(require 'emms-player-mpv)
+(add-to-list 'emms-player-list 'emms-player-mpv)
+(emms-all)
 
 ;; Setup mu4e
 (require 'mu4e)
