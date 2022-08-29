@@ -8,16 +8,31 @@
 ;; need to know about Emacs (what commands exist, what functions do,
 ;; what variables specify), the help system can provide.
 
-;; Load a custom theme
-(load-theme 'leuven t)
-
 ;; Set default font face
-(set-face-attribute 'default nil :font "Iosevka" :height 190)
-(set-fontset-font t 'han "等距更纱黑体 SC")
-(set-fontset-font t 'hangul "等距更纱黑体 K")
-(set-fontset-font t 'kana "等距更纱黑体 J")
-(set-fontset-font t 'cjk-misc "等距更纱黑体 SC")
-(set-fontset-font t nil "等距更纱黑体 CL" nil 'append)
+(set-face-attribute 'default nil :font "Iosevka" :height 200)
+(set-fontset-font t 'han "Sarasa Mono SC")
+(set-fontset-font t 'hangul "Sarasa Mono K")
+(set-fontset-font t 'kana "Sarasa Mono J")
+(set-fontset-font t 'cjk-misc "Sarasa Mono SC")
+(set-fontset-font t nil "Sarasa Mono CL" nil 'append)
+(set-face-attribute 'variable-pitch nil :font "Iosevka Aile")
+
+;; Load a custom theme
+(unless (package-installed-p 'ef-themes)
+  (package-install 'ef-themes))
+
+(require 'ef-themes)
+(setq
+ ef-themes-headings '((0 . (variable-pitch 2.2))
+		      (1 . (variable-pitch 2.0))
+		      (2 . (variable-pitch 1.8))
+		      (3 . (variable-pitch 1.6))
+		      (4 . (variable-pitch 1.4))
+		      (5 . (variable-pitch 1.2))
+		      (t . (variable-pitch 1.1)))
+ ef-themes-mixed-fonts t
+ ef-themes-variable-pitch-ui t)
+(load-theme 'ef-autumn :no-confirm)
 
 ;; Force fancy splash screen.
 (defun ShadowRZ/use-fancy-splash-screen-p ()
@@ -52,9 +67,6 @@
  ivy-use-virtual-buffers t
  enable-recursive-minibuffers t)
 (counsel-mode 1)
-
-;; Enable completion by narrowing
-(vertico-mode t)
 
 ;; Enable line numbering in `prog-mode'
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
@@ -125,9 +137,6 @@
 ;; Replace all yes/no with y/n.
 (fset 'yes-or-no-p #'y-or-n-p)
 
-;; Inhibit startup screen
-(setq inhibit-splash-screen t)
-
 ;; Emacs Pinentry
 (unless (package-installed-p 'pinentry)
   (package-install 'pinentry))
@@ -140,15 +149,6 @@
   (package-install 'swiper))
 
 (advice-add 'isearch-forward :override #'swiper)
-
-;; EMMS
-(unless (package-installed-p 'emms)
-  (package-install 'emms))
-
-(require 'emms)
-(require 'emms-player-mpv)
-(add-to-list 'emms-player-list 'emms-player-mpv)
-(emms-all)
 
 ;; Setup mu4e
 (require 'mu4e)
@@ -182,20 +182,6 @@
 ;; Discourage HTML part.
 (with-eval-after-load 'mm-decode
   (add-to-list 'mm-discouraged-alternatives "text/html"))
-
-;; ERC configuration.
-;; C-c e f: Open Libera.Chat
-(global-set-key "\C-cef" (lambda () (interactive)
-                           (erc-tls :server "irc.libera.chat" :port "7000"
-                                    :nick "PhantomFutaba"
-                                    :client-certificate t)))
-(setq
- erc-rename-buffers t
- erc-interpret-mirc-color t
- erc-kill-buffer-on-part t
- erc-kill-queries-on-quit t
- erc-kill-server-buffer-on-quit t
- erc-user-full-name "夜坂雅")
 
 ;; Store automatic customisation options elsewhere
 (setq custom-file (locate-user-emacs-file "custom.el"))
