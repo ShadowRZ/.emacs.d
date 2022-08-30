@@ -150,23 +150,12 @@
 
 (advice-add 'isearch-forward :override #'swiper)
 
-;; Setup mu4e
-(require 'mu4e)
+;; Setup Notmuch
+(autoload 'notmuch "notmuch"
+  "Run notmuch and display saved searches, known tags, etc." t)
 (setq
- ;; Mu4e folders
- ;; These folders are actually global. 
- mu4e-sent-folder "/Sent"
- mu4e-drafts-folder "/Drafts"
- mu4e-trash-folder "/Trash"
- mu4e-refile-folder "/Archive"
-
- ;; Tell mu4e how to update my mails.
- mu4e-get-mail-command "mbsync -a" ;; Via mbsync, and sync all accounts.
- mu4e-update-interval 600 ;; Update every 10 minutes.
-
- ;; Tell Emacs and mu4e what to do in sending my mail.
+ ;; Tell Emacs what to do in sending my mail.
  message-send-mail-function 'sendmail-send-it ;; Via msmtp's sendmail.
- mu4e-sent-messages-behavior 'sent ;; Preserve my sent mail in `mu4e-sent-folder'.
 
  ;; Who am I ?
  user-mail-address "shadowrz@disroot.org"
@@ -174,11 +163,13 @@
 
  ;; Misc.
  message-kill-buffer-on-exit t
- mu4e-split-view nil
+ notmuch-search-oldest-first nil
 
- ;; Set mu4e as default mailer.
- mail-user-agent 'mu4e-user-agent
- read-mail-command 'mu4e)
+ ;; Don't display logo.
+ notmuch-show-logo nil
+
+ ;; Set Notmuch as mail reader
+ read-mail-command 'notmuch)
 ;; Discourage HTML part.
 (with-eval-after-load 'mm-decode
   (add-to-list 'mm-discouraged-alternatives "text/html"))
