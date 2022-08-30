@@ -56,17 +56,22 @@
 (scroll-bar-mode -1)
 
 ;;; Completion framework
-(unless (package-installed-p 'ivy)
-  (package-install 'ivy))
+(unless (package-installed-p 'vertico)
+  (package-install 'vertico))
 
-(unless (package-installed-p 'counsel)
-  (package-install 'counsel))
+;; Enable completion by narrowing
+(vertico-mode t)
 
-(ivy-mode)
-(setq
- ivy-use-virtual-buffers t
- enable-recursive-minibuffers t)
-(counsel-mode 1)
+;; Improve directory navigation
+(with-eval-after-load 'vertico
+  (define-key vertico-map (kbd "RET") #'vertico-directory-enter)
+  (define-key vertico-map (kbd "DEL") #'vertico-directory-delete-word)
+  (define-key vertico-map (kbd "M-d") #'vertico-directory-delete-char)
+  (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy))
+
+(unless (package-installed-p 'consult)
+  (package-install 'consult))
+(advice-add 'isearch-forward :override #'consult-line)
 
 ;; Enable line numbering in `prog-mode'
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
@@ -144,11 +149,6 @@
 (require 'pinentry)
 (pinentry-start)
 
-;; Swiper
-(unless (package-installed-p 'swiper)
-  (package-install 'swiper))
-
-(advice-add 'isearch-forward :override #'swiper)
 
 ;; Setup Notmuch
 (autoload 'notmuch "notmuch"
