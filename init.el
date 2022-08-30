@@ -174,6 +174,13 @@
 (with-eval-after-load 'mm-decode
   (add-to-list 'mm-discouraged-alternatives "text/html"))
 
+;; Use Diminish to omit mode line items.
+(unless (package-installed-p 'diminish)
+  (package-install 'diminish))
+(require 'diminish)
+(diminish 'ivy-mode)
+(diminish 'counsel-mode)
+
 ;; Store automatic customisation options elsewhere
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (when (file-exists-p custom-file)
