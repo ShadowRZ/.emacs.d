@@ -34,12 +34,23 @@
 
 ;; Fullscreen on startup
 (set-frame-parameter nil 'fullscreen 'fullboth)
-;; Disable the menu bar
-(menu-bar-mode -1)
-;; Disable the tool bar
-(tool-bar-mode -1)
-;; Disable the scroll bars
-(scroll-bar-mode -1)
+
+;; Enable recursive minibuffer
+(setq enable-recursive-minibuffers t)
+
+;; Enable line numbering in `prog-mode'
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+;; Automatically pair parentheses
+(electric-pair-mode t)
+
+;; Force fancy splash screen.
+(defun ShadowRZ/use-fancy-splash-screen-p ()
+  "Return t if fancy splash screens should be used."
+  (and (display-graphic-p)
+       (or (and (display-color-p)
+		(image-type-available-p 'xpm))
+           (image-type-available-p 'pbm))))
+(advice-add 'use-fancy-splash-screens-p :override #'ShadowRZ/use-fancy-splash-screen-p)
 
 ;; Load a custom theme
 (ShadowRZ/with-eval-after-install 'ef-themes
@@ -56,20 +67,13 @@
    ef-themes-variable-pitch-ui t)
   (load-theme 'ef-autumn :no-confirm))
 
-;; Force fancy splash screen.
-(defun ShadowRZ/use-fancy-splash-screen-p ()
-  "Return t if fancy splash screens should be used."
-  (and (display-graphic-p)
-       (or (and (display-color-p)
-		(image-type-available-p 'xpm))
-           (image-type-available-p 'pbm))))
-(advice-add 'use-fancy-splash-screens-p :override #'ShadowRZ/use-fancy-splash-screen-p)
-
 ;;; Completion framework
 (ShadowRZ/with-eval-after-install 'vertico
   ;; Enable completion by narrowing
   (vertico-mode t)
-
+  (setq
+   vertico-resize t
+   vertico-count 6)
   ;; Improve directory navigation
   (with-eval-after-load 'vertico
     (define-key vertico-map (kbd "RET") #'vertico-directory-enter)
@@ -77,14 +81,66 @@
     (define-key vertico-map (kbd "M-d") #'vertico-directory-delete-char)
     (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)))
 
+;; Consult
 (ShadowRZ/with-eval-after-install 'consult
-  (advice-add 'isearch-forward :override #'consult-line))
+  ;; C-x bindings (ctl-x-map)
+  (global-set-key (kbd "C-x M-:") 'consult-complex-command)     ;; orig. repeat-complex-command
+  (global-set-key (kbd "C-x b") 'consult-buffer)                ;; orig. switch-to-buffer
+  (global-set-key (kbd "C-x 4 b") 'consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+  (global-set-key (kbd "C-x 5 b") 'consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+  (global-set-key (kbd "C-x r b") 'consult-bookmark)            ;; orig. bookmark-jump
+  (global-set-key (kbd "C-x p b") 'consult-project-buffer)      ;; orig. project-switch-to-buffer
+  ;; M-g bindings (goto-map)
+  (global-set-key (kbd "M-g e") 'consult-compile-error)
+  (global-set-key (kbd "M-g f") 'consult-flymake)               ;; Alternative: consult-flycheck
+  (global-set-key (kbd "M-g g") 'consult-goto-line)             ;; orig. goto-line
+  (global-set-key (kbd "M-g M-g") 'consult-goto-line)           ;; orig. goto-line
+  (global-set-key (kbd "M-g o") 'consult-outline)               ;; Alternative: consult-org-heading
+  (global-set-key (kbd "M-g m") 'consult-mark)
+  (global-set-key (kbd "M-g k") 'consult-global-mark)
+  (global-set-key (kbd "M-g i") 'consult-imenu)
+  (global-set-key (kbd "M-g I") 'consult-imenu-multi)
+  ;; M-s bindings (search-map)
+  (global-set-key (kbd "M-s d") 'consult-find)
+  (global-set-key (kbd "M-s D") 'consult-locate)
+  (global-set-key (kbd "M-s g") 'consult-grep)
+  (global-set-key (kbd "M-s G") 'consult-git-grep)
+  (global-set-key (kbd "M-s r") 'consult-ripgrep)
+  (global-set-key (kbd "M-s l") 'consult-line)
+  (global-set-key (kbd "M-s L") 'consult-line-multi)
+  (global-set-key (kbd "M-s m") 'consult-multi-occur)
+  ;; Isearch integration
+  (global-set-key (kbd "M-s e") 'consult-isearch-history)
+  (define-key isearch-mode-map (kbd "M-s l") 'consult-line)                  ;; needed by consult-line to detect isearch
+  (define-key isearch-mode-map (kbd "M-s L") 'consult-line-multi)            ;; needed by consult-line to detect isearch
+  (add-hook 'completion-list-mode 'consult-preview-at-point-mode)
+  (setq
+   xref-show-xrefs-function #'consult-xref
+   xref-show-definitions-function #'consult-xref
+   consult-narrow-key "<"))
 
-;; Enable line numbering in `prog-mode'
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+;; Orderless
+(ShadowRZ/with-eval-after-install 'orderless
+  (require 'orderless)
+  (setq
+   completion-styles '(orderless basic)
+   completion-category-overrides '((file (styles basic partial-completion)))))
 
-;; Automatically pair parentheses
-(electric-pair-mode t)
+;; Marginalia
+(ShadowRZ/with-eval-after-install 'marginalia
+  (marginalia-mode))
+
+;; Embark
+(ShadowRZ/with-eval-after-install 'embark
+  (global-set-key (kbd "C-.") 'embark-act)
+  (global-set-key (kbd "M-.") 'embark-dwim)
+  (global-set-key (kbd "C-h B") 'embark-bindings)
+  (add-to-list 'display-buffer-alist
+	       '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+		 nil
+		 (window-parameters (mode-line-format . none))))
+  ;; Embark + Consult
+  (ShadowRZ/with-eval-after-install 'embark-consult))
 
 ;;; Pop-up auto-completion
 (ShadowRZ/with-eval-after-install 'company
@@ -114,13 +170,6 @@
 
 ;;; Additional Org-mode related functionality
 (ShadowRZ/with-eval-after-install 'org-contrib)
-
-;;; Avy
-(ShadowRZ/with-eval-after-install 'avy
-  ;; Jump to arbitrary positions
-  (global-set-key (kbd "C-c z") #'avy-goto-word-1)
-  ;; Jump to any open window or frame
-  (setq avy-all-windows 'all-frames))
 
 (setq window-resize-pixelwise t)
 (setq frame-resize-pixelwise t)
@@ -157,7 +206,9 @@
 (ShadowRZ/with-eval-after-install 'diminish
   (require 'diminish)
   (diminish 'ivy-mode)
-  (diminish 'counsel-mode))
+  (diminish 'counsel-mode)
+  (add-hook 'company-mode-hook (lambda ()
+				  (diminish 'company-mode))))
 
 ;; Store automatic customisation options elsewhere
 (setq custom-file (locate-user-emacs-file "custom.el"))

@@ -3,6 +3,13 @@
 ;; Enable CJK N-Gram indexing for Xapian (used by mu)
 (setenv "XAPIAN_CJK_NGRAM" "1")
 
+;; Disable the menu bar
+(menu-bar-mode -1)
+;; Disable the tool bar
+(tool-bar-mode -1)
+;; Disable the scroll bars
+(scroll-bar-mode -1)
+
 ;; A marco for installing `PACKAGE' and do `BODY'.
 (defmacro ShadowRZ/with-eval-after-install (package &rest body)
   "Execute BODY after PACKAGE is loaded.
