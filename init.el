@@ -9,10 +9,12 @@
 ;; This `with-eval-after-load' is used to corporate with `package-quickstart'
 (with-eval-after-load 'package
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
   (setq
    ;; Make GNU ELPA and NonGNU ELPA has higher priority (1 > 0)
-   package-archive-priorities '(("gnu" . 1)
-				("nongnu" . 1))
+   package-archive-priorities '(("gnu" . 2)
+				("nongnu" . 2)
+				("melpa-stable" . 1))
    ;; Pin nix-mode to MELPA
    ;; MELPA -git version of nix-mode has a fix for Emacs 28
    package-pinned-packages '((nix-mode . "melpa"))))
@@ -140,7 +142,8 @@
 		 nil
 		 (window-parameters (mode-line-format . none))))
   ;; Embark + Consult
-  (ShadowRZ/with-eval-after-install 'embark-consult))
+  (ShadowRZ/with-eval-after-install 'embark-consult
+    (require 'embark-consult)))
 
 ;;; Pop-up auto-completion
 (ShadowRZ/with-eval-after-install 'company
@@ -205,10 +208,13 @@
 ;; Use Diminish to omit mode line items.
 (ShadowRZ/with-eval-after-install 'diminish
   (require 'diminish)
-  (diminish 'ivy-mode)
-  (diminish 'counsel-mode)
   (add-hook 'company-mode-hook (lambda ()
 				  (diminish 'company-mode))))
+
+;; EBDB
+(ShadowRZ/with-eval-after-install 'ebdb
+  (require 'ebdb-notmuch)
+  (require 'ebdb-message))
 
 ;; Store automatic customisation options elsewhere
 (setq custom-file (locate-user-emacs-file "custom.el"))

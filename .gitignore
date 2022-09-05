@@ -47,6 +47,10 @@ flycheck_*.el
 # network security
 /network-security.data
 
+# EBDB
+ebdb
+\#ebdb\#
+
 custom.el
 eln-cache/
 history
@@ -56,3 +60,4 @@ transient/
 emms/
 package-quickstart.el
 projects
+multisession
