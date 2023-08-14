@@ -26,13 +26,13 @@
 (setq use-short-answers t)
 
 ;; Set default font face
-(set-face-attribute 'default nil :font "Iosevka" :height 200)
+(set-face-attribute 'default nil :font "Iosevka Minoko" :width 'expanded :height 200)
 (set-fontset-font t 'han "Sarasa Mono SC")
 (set-fontset-font t 'hangul "Sarasa Mono K")
 (set-fontset-font t 'kana "Sarasa Mono J")
 (set-fontset-font t 'cjk-misc "Sarasa Mono SC")
 (set-fontset-font t nil "Sarasa Mono CL" nil 'append)
-(set-face-attribute 'variable-pitch nil :font "Iosevka Aile")
+(set-face-attribute 'variable-pitch nil :font "Iosevka Aile Minoko")
 
 ;; Fullscreen on startup
 (set-frame-parameter nil 'fullscreen 'fullboth)
