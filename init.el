@@ -3,22 +3,6 @@
 ;; Load dumped autoloads
 (setq package-quickstart t)
 
-;; FIXME: Append MELPA for our purposes described below
-;; Remove when next version of nix-mode is avaliable on NonGNU ELPA
-;;
-;; This `with-eval-after-load' is used to corporate with `package-quickstart'
-(with-eval-after-load 'package
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-  (setq
-   ;; Make GNU ELPA and NonGNU ELPA has higher priority (1 > 0)
-   package-archive-priorities '(("gnu" . 2)
-				("nongnu" . 2)
-				("melpa-stable" . 1))
-   ;; Pin nix-mode to MELPA
-   ;; MELPA -git version of nix-mode has a fix for Emacs 28
-   package-pinned-packages '((nix-mode . "melpa"))))
-
 ;; Don't bother to do a bell ring
 (setq ring-bell-function 'ignore)
 
