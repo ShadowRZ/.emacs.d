@@ -49,9 +49,8 @@
 			(4 . (variable-pitch 1.4))
 			(5 . (variable-pitch 1.2))
 			(t . (variable-pitch 1.1)))
-   ef-themes-mixed-fonts t
-   ef-themes-variable-pitch-ui t)
-  (load-theme 'ef-autumn :no-confirm))
+   ef-themes-mixed-fonts t)
+  (load-theme 'ef-winter :no-confirm))
 
 ;;; Completion framework
 (ShadowRZ/with-eval-after-install 'vertico
@@ -158,6 +157,10 @@
 ;;; Additional Org-mode related functionality
 (ShadowRZ/with-eval-after-install 'org-contrib)
 
+;;; Which-key
+(ShadowRZ/with-eval-after-install 'which-key
+  (which-key-mode))
+
 (setq window-resize-pixelwise t)
 (setq frame-resize-pixelwise t)
 (save-place-mode t)
@@ -193,7 +196,8 @@
 (ShadowRZ/with-eval-after-install 'diminish
   (require 'diminish)
   (add-hook 'company-mode-hook (lambda ()
-				  (diminish 'company-mode))))
+				 (diminish 'company-mode)
+				 (diminish 'which-key-mode))))
 
 ;; EBDB
 (ShadowRZ/with-eval-after-install 'ebdb
