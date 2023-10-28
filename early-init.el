@@ -9,6 +9,8 @@
 (tool-bar-mode -1)
 ;; Disable the scroll bars
 (scroll-bar-mode -1)
+;; Fullscreen on startup
+(push '(fullscreen . fullboth) default-frame-alist)
 
 ;; A marco for installing `PACKAGE' and do `BODY'.
 (defmacro ShadowRZ/with-eval-after-install (package &rest body)

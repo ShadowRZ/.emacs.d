@@ -18,9 +18,6 @@
 (set-fontset-font t nil "Sarasa Mono CL" nil 'append)
 (set-face-attribute 'variable-pitch nil :font "Iosevka Aile Minoko")
 
-;; Fullscreen on startup
-(set-frame-parameter nil 'fullscreen 'fullboth)
-
 ;; Enable recursive minibuffer
 (setq enable-recursive-minibuffers t)
 
