@@ -172,37 +172,12 @@
   (require 'pinentry)
   (pinentry-start))
 
-;; Setup Notmuch
-(autoload 'notmuch "notmuch"
-  "Run notmuch and display saved searches, known tags, etc." t)
-(setq
- ;; Tell Emacs what to do in sending my mail.
- message-send-mail-function 'sendmail-send-it ;; Via msmtp's sendmail.
- ;; Who am I ?
- user-mail-address "shadowrz@disroot.org"
- user-full-name "夜坂雅"
- ;; Misc.
- message-kill-buffer-on-exit t
- notmuch-search-oldest-first nil
- ;; Don't display logo.
- notmuch-show-logo nil
- ;; Set Notmuch as mail reader
- read-mail-command 'notmuch)
-;; Discourage HTML part.
-(with-eval-after-load 'mm-decode
-  (add-to-list 'mm-discouraged-alternatives "text/html"))
-
 ;; Use Diminish to omit mode line items.
 (ShadowRZ/with-eval-after-install 'diminish
   (require 'diminish)
   (add-hook 'company-mode-hook (lambda ()
 				 (diminish 'company-mode)
 				 (diminish 'which-key-mode))))
-
-;; EBDB
-(ShadowRZ/with-eval-after-install 'ebdb
-  (require 'ebdb-notmuch)
-  (require 'ebdb-message))
 
 ;; Store automatic customisation options elsewhere
 (setq custom-file (locate-user-emacs-file "custom.el"))
