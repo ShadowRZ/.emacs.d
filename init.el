@@ -10,13 +10,17 @@
 (setq use-short-answers t)
 
 ;; Set default font face
-(set-face-attribute 'default nil :font "Iosevka Minoko" :width 'expanded :height 200)
-(set-fontset-font t 'han "Sarasa Mono SC")
-(set-fontset-font t 'hangul "Sarasa Mono K")
-(set-fontset-font t 'kana "Sarasa Mono J")
-(set-fontset-font t 'cjk-misc "Sarasa Mono SC")
-(set-fontset-font t nil "Sarasa Mono CL" nil 'append)
-(set-face-attribute 'variable-pitch nil :font "Iosevka Aile Minoko")
+(defun ShadowRZ/set-font-faces ()
+  (set-face-attribute 'default nil :font "Iosevka Minoko" :width 'expanded :height 200)
+  (set-fontset-font t 'han "Sarasa Mono SC")
+  (set-fontset-font t 'hangul "Sarasa Mono K")
+  (set-fontset-font t 'kana "Sarasa Mono J")
+  (set-fontset-font t 'cjk-misc "Sarasa Mono SC")
+  (set-fontset-font t nil "Sarasa Mono CL" nil 'append)
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile Minoko"))
+
+(add-hook 'server-after-make-frame-hook #'ShadowRZ/set-font-faces)
+(ShadowRZ/set-font-faces)
 
 ;; Enable recursive minibuffer
 (setq enable-recursive-minibuffers t)
