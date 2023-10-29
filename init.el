@@ -3,12 +3,6 @@
 ;; Load dumped autoloads
 (setq package-quickstart t)
 
-;; Don't bother to do a bell ring
-(setq ring-bell-function 'ignore)
-
-;; Use short answers
-(setq use-short-answers t)
-
 ;; Set default font face
 (defun ShadowRZ/set-font-faces ()
   (set-face-attribute 'default nil :font "Iosevka Minoko" :width 'expanded :height 200)
@@ -18,18 +12,7 @@
   (set-fontset-font t 'cjk-misc "Sarasa Mono SC")
   (set-fontset-font t nil "Sarasa Mono CL" nil 'append)
   (set-face-attribute 'variable-pitch nil :font "Iosevka Aile Minoko"))
-
-;; Set font faces for Server frames
-(add-hook 'server-after-make-frame-hook #'ShadowRZ/set-font-faces)
 (ShadowRZ/set-font-faces)
-
-;; Enable recursive minibuffer
-(setq enable-recursive-minibuffers t)
-
-;; Enable line numbering in `prog-mode'
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
-;; Automatically pair parentheses
-(electric-pair-mode t)
 
 ;; Force fancy splash screen.
 (defun ShadowRZ/use-fancy-splash-screen-p ()
@@ -262,7 +245,28 @@
   :init
   (pinentry-start))
 
-;; Store automatic customisation options elsewhere
-(setq custom-file (locate-user-emacs-file "custom.el"))
-(when (file-exists-p custom-file)
-  (load custom-file))
+(use-package emacs
+  :hook (
+	 ;; Enable line numbering in `prog-mode'
+	 (prog-mode . display-line-numbers-mode)
+	 ;; Set font faces for Server frames
+	 (server-after-make-frame . ShadowRZ/set-font-faces))
+  :diminish eldoc-mode
+  :init
+  ;; Don't bother to do a bell ring
+  (setq ring-bell-function 'ignore)
+  ;; Use short answers
+  (setq use-short-answers t)
+  ;; Enable recursive minibuffer
+  (setq enable-recursive-minibuffers t)
+  ;; TAB cycle if there are only few candidates
+  (setq completion-cycle-threshold 3)
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete)
+  ;; Automatically pair parentheses
+  (electric-pair-mode t)
+  ;; Store automatic customisation options elsewhere
+  (setq custom-file (locate-user-emacs-file "custom.el"))
+  (when (file-exists-p custom-file)
+    (load custom-file)))
