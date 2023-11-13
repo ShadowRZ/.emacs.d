@@ -29,7 +29,7 @@
 ;; Load a custom theme
 (use-package ef-themes
   :ensure t
-  :init
+  :config
   (setq ef-themes-headings '((0 . (variable-pitch 2.2))
 			     (1 . (variable-pitch 2.0))
 			     (2 . (variable-pitch 1.8))
@@ -38,7 +38,7 @@
 			     (5 . (variable-pitch 1.2))
 			     (t . (variable-pitch 1.1)))
 	ef-themes-mixed-fonts t)
-  :config (load-theme 'ef-winter :no-confirm))
+  (load-theme 'ef-winter :no-confirm))
 
 ;;; Completion framework
 (use-package vertico
@@ -218,6 +218,9 @@
 
 ;;; Outline-based notes management and organizer
 (use-package org
+  :init
+  (setq org-directory "~/Documents/Org")
+  (setq org-hidden-keywords '(title author email date subtitle))
   :bind (("C-c l" . org-store-link)
 	 ("C-c a" . org-agenda)))
 
